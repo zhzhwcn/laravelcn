@@ -13,5 +13,5 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return file_get_contents('../readme.md');
 });
