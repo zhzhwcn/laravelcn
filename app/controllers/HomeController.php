@@ -22,6 +22,8 @@ class HomeController extends BaseController {
 		$this->layout->title = trans('Home');
 		$this->layout->description = '';
 		$this->layout->keywords = '';
+		$this->layout->left = '';
+		$this->layout->right = '';
 	}
 
 }
