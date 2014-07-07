@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', function()
-{
-	return file_get_contents('../readme.md');
-});
+//home route
+Route::get('/', 'HomeController@showHome');
+
+//user routes
+Route::get('/login');
+Route::post('/login');
+Route::get('/reg');
+Route::post('/reg');
