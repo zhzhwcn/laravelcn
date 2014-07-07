@@ -11,7 +11,4 @@
 |
 */
 
-Route::get('/', function()
-{
-	return file_get_contents('../readme.md');
-});
+Route::get('/', 'HomeController@showHome');
