@@ -15,7 +15,7 @@
 Route::get('/', 'HomeController@showHome');
 
 //user routes
-Route::get('/login');
-Route::post('/login');
-Route::get('/reg');
-Route::post('/reg');
+Route::get('/login', 'UserController@getLogin');
+Route::post('/login', 'UserController@postLogin');
+Route::get('/reg', 'UserController@getReg');
+Route::post('/reg', 'UserController@postReg');
