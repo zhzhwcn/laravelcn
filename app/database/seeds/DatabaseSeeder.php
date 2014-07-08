@@ -11,7 +11,11 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		// $this->call('UserTableSeeder');
+		if (Schema::hasTable('nodes'))
+		{
+			Node::create(array('name'=>'laravel','display_name'=>'laravel'));
+		}
+		
 	}
 
 }
