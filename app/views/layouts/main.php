@@ -7,6 +7,7 @@
 	<meta name="description" content="<?php echo $description?>">
 	<meta name="keywords" content="<?php echo $keywords?>">
 	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script src="/bootstrap/js/jquery.min.js"></script>
 </head>
 <body>
 <header class="navbar navbar-static-top bs-docs-nav navbar-inverse" id="top" role="banner">
@@ -48,7 +49,6 @@
 		Copyright @ 2014-<?php echo date('Y');?>
 	</div>
 </footer>
-<script src="/bootstrap/js/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
