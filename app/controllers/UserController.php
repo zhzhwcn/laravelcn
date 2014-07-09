@@ -27,11 +27,10 @@ class UserController extends BaseController {
 	
 	public function postLogin()
 	{
-		if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password')), (bool)Input::get('remember'))){
+		if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')), (bool)Input::get('remember'))){
 			return Redirect::to('/');
 		} else {
-			Session::put('incorrectPassword', true);
-			return Redirect::to('/login')->withInput();
+			return Redirect::to('/login')->withErrors(trans('incorrectPassword'));
 		}
 	}
 	
