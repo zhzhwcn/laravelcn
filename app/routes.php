@@ -20,3 +20,10 @@ Route::post('/login', 'UserController@postLogin');
 Route::get('/reg', 'UserController@getReg');
 Route::post('/reg', 'UserController@postReg');
 
+//forum routes
+Route::group(array('before' => 'auth'), function()
+{
+	Route::get('/new/{node}','ForumController@getNew');
+	Route::post('/new/{node}','ForumController@postNew');
+	Route::post('/reply/{thread_id}','ForumController@postReply');
+});
