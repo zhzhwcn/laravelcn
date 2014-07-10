@@ -27,3 +27,4 @@ Route::group(array('before' => 'auth'), function()
 	Route::post('/new/{node}','ForumController@postNew');
 	Route::post('/reply/{thread_id}','ForumController@postReply');
 });
+Route::get('/thread/{thread_id}','ForumController@getThread');
