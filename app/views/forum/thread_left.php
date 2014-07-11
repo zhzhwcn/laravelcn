@@ -40,6 +40,7 @@
 			</li>
 			<?php }?>
 		</ul>
+		<?php echo $replys->links();?>
 	</div>
 </div>
 <div class="panel panel-default">

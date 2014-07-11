@@ -58,7 +58,7 @@ class ForumController extends BaseController {
 							->leftjoin('users','threads.user_id','=','users.id')
 							->select('threads.content','threads.created_at','threads.updated_at','users.username','users.email')
 							->where('parent_id','=',$thread->id)
-							->get();
+							->paginate(10);
 		$this->layout->title = $thread->title;
 		$this->layout->description = '';
 		$this->layout->keywords = '';
