@@ -28,8 +28,12 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="http://expo.bootcss.com">登录</a></li>
-				<li><a href="http://blog.getbootstrap.com">注册</a></li>
+				<?php if(!Auth::check()){?>
+				<li><a href="<?php echo url('/login')?>"><?php echo trans('Login');?></a></li>
+				<li><a href="<?php echo url('/reg')?>"><?php echo trans('Register');?></a></li>
+				<?php } else {?>
+				<li><a href="#"><?php echo Auth::user()->username;?></a></li>
+				<?php }?>
 			</ul>
 		</nav>
 	</div>
