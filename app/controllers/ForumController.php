@@ -86,6 +86,7 @@ class ForumController extends BaseController {
 			$thread->replys = 0;
 			$thread->save();
 			DB::table('threads')->where('id','=',$parent->id)->increment('replys');
+			$parent->touch();
 			return Redirect::to('/thread/'.$parent->id);
 		}
 	}
