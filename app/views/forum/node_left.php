@@ -1,6 +1,7 @@
 <div class="panel panel-default">
 	<div class="panel-body">
-		<h1><?php echo $node->display_name;?></h1>
+		<h2><?php echo $node->display_name;?></h2>
+		<p><a class="btn btn-primary" href="<?php echo url('/new/'.$node->name);?>"><?php echo trans('Make a new thread')?></a></p>
 	</div>
 	<div class="panel-body">
 		<ul class="media-list">
