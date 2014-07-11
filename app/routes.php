@@ -28,3 +28,4 @@ Route::group(array('before' => 'auth'), function()
 	Route::post('/reply/{thread_id}','ForumController@postReply');
 });
 Route::get('/thread/{thread_id}','ForumController@getThread');
+Route::get('/node/{node}','ForumController@getNode');

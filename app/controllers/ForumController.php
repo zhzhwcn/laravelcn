@@ -11,14 +11,15 @@ class ForumController extends BaseController {
 	|	Route::post('/new/{node}','ForumController@postNew');
 	|	Route::get('/thread/{thread_id}','ForumController@getThread');
 	|	Route::post('/reply/{thread_id}','ForumController@postReply');
+	|	Route::get('/node/{node}','ForumController@getNode');
 	|
 	*/
 	
 	protected $layout = 'layouts.main';
 	
-	public function getNew($node = '')
+	public function getNew($name = '')
 	{
-		$node = Node::where('name','=',$node)->firstOrFail();;
+		$node = Node::where('name','=',$name)->firstOrFail();
 		$this->layout->title = trans('New Post');
 		$this->layout->description = '';
 		$this->layout->keywords = '';
@@ -27,14 +28,14 @@ class ForumController extends BaseController {
 		$this->layout->right = View::make('forum.new_right');
 	}
 	
-	public function postNew($node = '')
+	public function postNew($name = '')
 	{
 		$rules = array('title'=>'required|min:2');
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->fails()){
 			return Redirect::back()->withErrors($validator);
 		} else {
-			$node = Node::where('name','=',$node)->firstOrFail();
+			$node = Node::where('name','=',$name)->firstOrFail();
 			$thread = new Thread;
 			$thread->title = e(Input::get('title'));
 			$thread->content = \Michelf\Markdown::defaultTransform(e(Input::get('content')));
@@ -89,5 +90,23 @@ class ForumController extends BaseController {
 			$parent->touch();
 			return Redirect::to('/thread/'.$parent->id);
 		}
+	}
+	
+	public function getNode($name = '')
+	{
+		$node = Node::where('name','=',$name)->firstOrFail();
+		$threads = DB::table('threads')
+							->leftjoin('users','threads.user_id','=','users.id')
+							->select('threads.id','threads.title','threads.created_at','threads.updated_at','users.username','users.email')
+							->where('parent_id','=',0)
+							->where('node_id','=',$node->id)
+							->paginate(10);
+		$this->layout->title = $node->display_name;
+		$this->layout->description = '';
+		$this->layout->keywords = '';
+		$this->layout->left = View::make('forum.node_left')
+									->with('node',$node)
+									->with('threads',$threads);
+		$this->layout->right = View::make('forum.node_right');
 	}
 }
