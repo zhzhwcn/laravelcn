@@ -19,11 +19,23 @@ class HomeController extends BaseController {
 	
 	public function showHome()
 	{
+		$threads = DB::table('threads')
+							->leftjoin('users','threads.user_id','=','users.id')
+							->leftjoin('nodes','threads.node_id','=','nodes.id')
+							->select(
+								'threads.id','threads.title','threads.created_at','threads.updated_at',
+								'users.username','users.email',
+								'nodes.id AS nid','nodes.name','nodes.display_name'
+							)
+							->where('threads.parent_id','=',0)
+							->orderBy('threads.updated_at','DESC')
+							->paginate(20);
 		$this->layout->title = trans('Home');
 		$this->layout->description = '';
 		$this->layout->keywords = '';
-		$this->layout->left = '';
-		$this->layout->right = '';
+		$this->layout->left = View::make('home.left')
+									->with('threads',$threads);
+		$this->layout->right = View::make('home.right');
 	}
 
 }
