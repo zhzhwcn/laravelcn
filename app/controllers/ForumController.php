@@ -100,6 +100,7 @@ class ForumController extends BaseController {
 							->select('threads.id','threads.title','threads.created_at','threads.updated_at','users.username','users.email')
 							->where('parent_id','=',0)
 							->where('node_id','=',$node->id)
+							->orderBy('updated_at','DESC')
 							->paginate(10);
 		$this->layout->title = $node->display_name;
 		$this->layout->description = '';
