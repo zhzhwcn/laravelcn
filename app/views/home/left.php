@@ -27,3 +27,11 @@
 		<?php echo $threads->links();?>
 	</div>
 </div>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<h4><?php echo trans('Nodes')?></h4>
+		<?php foreach($nodes as $node){?>
+			<a href="<?php echo url('/node/'.$node->name)?>"><?php echo $node->display_name;?></a>
+		<?php }?>
+	</div>
+</div>

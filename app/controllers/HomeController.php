@@ -30,10 +30,12 @@ class HomeController extends BaseController {
 							->where('threads.parent_id','=',0)
 							->orderBy('threads.updated_at','DESC')
 							->paginate(20);
+		$nodes = DB::table('nodes')->get();
 		$this->layout->title = trans('Home');
 		$this->layout->description = '';
 		$this->layout->keywords = '';
 		$this->layout->left = View::make('home.left')
+									->with('nodes',$nodes)
 									->with('threads',$threads);
 		$this->layout->right = View::make('home.right');
 	}
